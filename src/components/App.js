@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+import logo from './../media/tomato.svg';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header>
+          <img src={logo} className="App-logo" alt="logo" />
+          <p>Reloj Tomatito</p>
       </header>
+      <div id="contentBox">
+        <div id="redCarcass">
+          <div id="paleInside">
+            <div className="display" id="type">
+              <p>break</p>
+            </div>
+            <div className="display" id="minutes">
+              <p>05</p>
+            </div>
+            <div className="display" id="seconds">
+              <p>39</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer>
+          <p>	&#169; 2020, camila.</p>
+        </footer>
     </div>
   );
 }
