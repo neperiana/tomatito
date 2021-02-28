@@ -84,6 +84,16 @@
   padding: 0px 20px 0px 20px;
 }
 
+.imageButtton:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.imageButtton:active + .topButton {
+  max-height: 10px;
+  border-radius: 5px 5px 0px 0px;
+}
+
 .topButton {
   background-color: #545454;
   width: 10vw;
@@ -132,7 +142,7 @@
   justify-content: space-around;
 }
 
-.display p {
+.display span {
   font-family: "Chango", sans-serif;
   font-size: 5em;
   color: #fdefd8;
@@ -143,7 +153,7 @@
   height: 40%;
 }
 
-#type p {
+#type span {
   font-size: 2em;
 }
 

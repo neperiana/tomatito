@@ -1,3 +1,6 @@
+// React
+import React, { Component } from 'react';
+
 // images
 import logo from './../media/tomato.svg';
 import restartLogo from './../media/repeat.svg';
@@ -12,26 +15,66 @@ import Form from 'react-bootstrap/Form';
 // css
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
+// utils
+const zeroPad = (num, places) => String(num).padStart(places, '0')
 
-      <header className="header">
-          <img src={logo} className="appLogo" alt="logo" />
-          <span>Reloj Tomatito</span>
-      </header>
-
-      <div id="contentBox">
-        <ClockComponent />
-        <SettingsComponent />
-      </div>  
-
-      <footer className="footer">
-        <span>  &#169; 2021, camila.</span>
-      </footer>
-      
-    </div>
-  );
+// Main App Component
+class App extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      isLive: false,
+      display: {
+        type: 'break',
+        time: {
+          minutes: 5,
+          seconds: 39
+        },
+      }, 
+      settings: {
+        work: 55,
+        break: 5,
+      }
+    };
+    this.handleRestart = this.handleRestart.bind(this);
+  }
+  handleRestart(event){
+    this.setState({ 
+      isLive: false,
+      display: {
+        type: 'work',
+        time: {
+          minutes: 55,
+          seconds: zeroPad(0, 2)
+        },
+      }, 
+      settings: {
+        work: 55,
+        break: 5,
+      }
+    });
+  }
+  render(){
+    return (
+      <div className="App">
+  
+        <header className="header">
+            <img src={logo} className="appLogo" alt="logo" />
+            <span>Reloj Tomatito</span>
+        </header>
+  
+        <div id="contentBox">
+          <ClockComponent display={this.state.display} refresh={this.handleRestart}/>
+          <SettingsComponent />
+        </div>  
+  
+        <footer className="footer">
+          <span>  &#169; 2021, camila.</span>
+        </footer>
+  
+      </div>
+    );
+  }
 }
 
 
@@ -41,7 +84,7 @@ const ClockComponent = props => {
     <div id="mainBody">
       <div id="buttonsContainer">
         <div className="topButtonContainer">
-          <img src={restartLogo} id="restartLogo" className="imageButtton" alt="restart button" />
+          <img src={restartLogo} id="restartLogo" className="imageButtton" alt="restart button" onClick={props.refresh}/>
           <div className="topButton"></div>
         </div>
         <div className="topButtonContainer">
@@ -52,13 +95,13 @@ const ClockComponent = props => {
       <div id="redCarcass">
         <div id="paleInside">
           <div className="display" id="type">
-            <p>break</p>
+            <span>{props.display.type}</span>
           </div>
           <div className="display" id="minutes">
-            <p>05</p>
+            <span>{props.display.time.minutes}</span>
           </div>
           <div className="display" id="seconds">
-            <p>39</p>
+            <span>{props.display.time.seconds}</span>
           </div>
         </div>
       </div>
