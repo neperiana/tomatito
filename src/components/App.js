@@ -18,6 +18,16 @@ import './App.css';
 // utils
 const zeroPad = (num, places) => String(num).padStart(places, '0')
 
+const secondsToTime = (totalSeconds) => {
+
+  let minutes = Math.floor(totalSeconds/60);
+  let seconds = totalSeconds - minutes*60;
+
+  return([zeroPad(minutes, 2),  zeroPad(seconds, 2)]);
+}
+
+const minutesToSeconds = (minutes) => minutes*60
+
 // Main App Component
 class App extends Component {
   constructor(props) {
@@ -26,10 +36,7 @@ class App extends Component {
       isLive: false,
       display: {
         type: 'break',
-        time: {
-          minutes: 5,
-          seconds: 39
-        },
+        seconds: minutesToSeconds(55),
       }, 
       settings: {
         work: 55,
@@ -37,22 +44,57 @@ class App extends Component {
       }
     };
     this.handleRestart = this.handleRestart.bind(this);
+    this.setSettings = this.setSettings.bind(this);
+    this.settingsManualInput = this.settingsManualInput.bind(this);
+    this.settingsArrowClick = this.settingsArrowClick.bind(this);
   }
   handleRestart(event){
     this.setState({ 
       isLive: false,
       display: {
         type: 'work',
-        time: {
-          minutes: 55,
-          seconds: zeroPad(0, 2)
-        },
+        seconds: minutesToSeconds(13)+12,
       }, 
       settings: {
         work: 55,
         break: 5,
       }
     });
+  }
+  setSettings(type, value){
+    if (type == 'work') {
+      console.log('holahola:',type, value);
+      this.setState({ 
+        settings: {
+          work:  value > 0 ? value : 0,
+          break: this.state.settings.break,
+        }
+      });
+    } else if (type == 'break') {
+      this.setState({ 
+        settings: {
+          work: this.state.settings.work,
+          break: value > 0 ? value : 0,
+        }
+      });
+    }
+  }
+  /*
+  this.myInterval = setInterval(() => {
+    this.setState(({ seconds }) => ({
+      seconds: seconds - 1
+    }))
+  }, 1000)
+  */ 
+  settingsManualInput(event){
+    let settingsType = event.target.id == 'workControl' ? 'work' : 'break';
+    this.setSettings(settingsType, event.target.value); 
+  }
+  settingsArrowClick(event){
+    let settingsType = event.target.parentElement.id == 'workArrowsContainer' ? 'work' : 'break';
+    let change = event.target.id.includes('up') ? 1 : -1;
+    let newValue = (settingsType == 'work' ?  this.state.settings.work : this.state.settings.break) + change;
+    this.setSettings(settingsType, newValue); 
   }
   render(){
     return (
@@ -65,7 +107,11 @@ class App extends Component {
   
         <div id="contentBox">
           <ClockComponent display={this.state.display} refresh={this.handleRestart}/>
-          <SettingsComponent />
+          <SettingsComponent 
+            settings={this.state.settings} 
+            onChange={this.settingsManualInput} 
+            onArrowClick={this.settingsArrowClick}
+          />
         </div>  
   
         <footer className="footer">
@@ -80,6 +126,9 @@ class App extends Component {
 
 // Main clock
 const ClockComponent = props => {
+  let minutes, seconds
+  [minutes, seconds] = secondsToTime(props.display.seconds);
+  //console.log(minutes, seconds);
   return (
     <div id="mainBody">
       <div id="buttonsContainer">
@@ -98,10 +147,10 @@ const ClockComponent = props => {
             <span>{props.display.type}</span>
           </div>
           <div className="display" id="minutes">
-            <span>{props.display.time.minutes}</span>
+            <span>{minutes}</span>
           </div>
           <div className="display" id="seconds">
-            <span>{props.display.time.seconds}</span>
+            <span>{seconds}</span>
           </div>
         </div>
       </div>
@@ -115,21 +164,21 @@ const SettingsComponent = props => {
   return (
     <div id="sideControl">
       <div id="labels" className="sideControlCol">
-        <span>work: </span>
-        <span>break: </span>
+        <span>work (min): </span>
+        <span>break (min): </span>
       </div>
       <div id="inputs" className="sideControlCol">
-        <Form.Control size="sm" type="text" placeholder="55 min" />
-        <Form.Control size="sm" type="text" placeholder="5 min" />
+        <Form.Control size="sm" type="text" id="workControl" value={props.settings.work} onChange={props.onChange}/>
+        <Form.Control size="sm" type="text" id="breakControl" value={props.settings.break} onChange={props.onChange}/>
       </div>
       <div id="buttons" className="sideControlCol">
-        <div className="upDownButtonsContainers">
-          <img src={upLogo} id="upWorkLogo" className="arrowButtton" alt="up worktime button" />
-          <img src={downLogo} id="downWorkLogo" className="arrowButtton" alt="down worktime button" />
+        <div className="upDownButtonsContainers" id="workArrowsContainer">
+          <img src={upLogo} id="upWorkLogo" className="arrowButtton" alt="up worktime button" onClick={props.onArrowClick}/>
+          <img src={downLogo} id="downWorkLogo" className="arrowButtton" alt="down worktime button" onClick={props.onArrowClick}/>
         </div>
-        <div className="upDownButtonsContainers">
-          <img src={upLogo} id="upWorkLogo" className="arrowButtton" alt="up worktime button" />
-          <img src={downLogo} id="downWorkLogo" className="arrowButtton" alt="down worktime button" />
+        <div className="upDownButtonsContainers" id="breakArrowsContainer">
+          <img src={upLogo} id="upWorkLogo" className="arrowButtton" alt="up worktime button"  onClick={props.onArrowClick}/>
+          <img src={downLogo} id="downWorkLogo" className="arrowButtton" alt="down worktime button"  onClick={props.onArrowClick}/>
         </div>
       </div>
     </div>
