@@ -181,14 +181,13 @@ class App extends Component {
         </div>  
   
         <footer className="footer">
-          <span>  &#169; 2021, camila.</span>
+          <span>  &#169; 2021, camila. Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> and <a href="https://icon54.com/" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">flaticon</a>.</span>
         </footer>
   
       </div>
     );
   }
 }
-
 
 // Main clock
 const ClockComponent = props => {
