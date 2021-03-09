@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/tomatito/static/css/main.352abeb6.chunk.css",
+    "main.js": "/tomatito/static/js/main.4eb7d950.chunk.js",
+    "main.js.map": "/tomatito/static/js/main.4eb7d950.chunk.js.map",
+    "runtime-main.js": "/tomatito/static/js/runtime-main.42f37d84.js",
+    "runtime-main.js.map": "/tomatito/static/js/runtime-main.42f37d84.js.map",
+    "static/css/2.150d169a.chunk.css": "/tomatito/static/css/2.150d169a.chunk.css",
+    "static/js/2.a7becbfb.chunk.js": "/tomatito/static/js/2.a7becbfb.chunk.js",
+    "static/js/2.a7becbfb.chunk.js.map": "/tomatito/static/js/2.a7becbfb.chunk.js.map",
+    "index.html": "/tomatito/index.html",
+    "static/css/2.150d169a.chunk.css.map": "/tomatito/static/css/2.150d169a.chunk.css.map",
+    "static/css/main.352abeb6.chunk.css.map": "/tomatito/static/css/main.352abeb6.chunk.css.map",
+    "static/js/2.a7becbfb.chunk.js.LICENSE.txt": "/tomatito/static/js/2.a7becbfb.chunk.js.LICENSE.txt",
+    "static/media/down-arrow.5729c691.svg": "/tomatito/static/media/down-arrow.5729c691.svg",
+    "static/media/pause-button.30fe7730.svg": "/tomatito/static/media/pause-button.30fe7730.svg",
+    "static/media/play-button.beeaf3ea.svg": "/tomatito/static/media/play-button.beeaf3ea.svg",
+    "static/media/repeat.94d34ee0.svg": "/tomatito/static/media/repeat.94d34ee0.svg",
+    "static/media/tomato.bb7ac504.svg": "/tomatito/static/media/tomato.bb7ac504.svg",
+    "static/media/up-arrow.c0423b32.svg": "/tomatito/static/media/up-arrow.c0423b32.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.42f37d84.js",
+    "static/css/2.150d169a.chunk.css",
+    "static/js/2.a7becbfb.chunk.js",
+    "static/css/main.352abeb6.chunk.css",
+    "static/js/main.4eb7d950.chunk.js"
+  ]
+}
