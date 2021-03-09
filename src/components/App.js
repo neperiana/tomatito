@@ -243,13 +243,11 @@ const SettingsComponent = props => {
           value={props.settings.work} 
           onChange={props.onChange} 
           disabled={props.isLive}
-          numbersOnly
         />
         <Form.Control size="sm" type="text" id="breakControl" 
           value={props.settings.break} 
           onChange={props.onChange} 
           disabled={props.isLive}
-          numbersOnly
         />
       </div>
       <div id="buttons" className="sideControlCol">
